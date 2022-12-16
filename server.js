@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
+const path = require('path')
 
 // include and initialize the rollbar library with your access token
 var Rollbar = require("rollbar");
@@ -16,11 +17,12 @@ rollbar.log("Hello world!");
 
 app.use(express.json())
 
-app.use(express.static(`../assessment-qa-devops/public`))
+app.use(express.static(`public`))
 
 app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../public/index.html'))
 })
+
 
 app.get('/api/robots', (req, res) => {
     try {
